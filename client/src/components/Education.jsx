@@ -1,8 +1,6 @@
 import SecondaryBtn from "./SecondaryBtn";
 
 const Education = ({ education }) => {
-    const paper = " bg-white py-3 px-4 border-2 rounded-lg shadow ";
-
     return (
         <div>
             <div className="flex justify-between items-center text-sm font-semibold">
@@ -10,7 +8,7 @@ const Education = ({ education }) => {
                 <SecondaryBtn name={"Edit"} />
             </div>
             {education.map((edu, index) => (
-                <div className={paper + "my-4"} key={index}>
+                <div className="paper my-4" key={index}>
                     <span className="text-[color:var(--primary)] text-xl font-semibold">
                         {edu.institute_name}
                     </span>

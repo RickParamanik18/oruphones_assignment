@@ -4,8 +4,6 @@ import Image from "next/image";
 import badgePic from "../../public/badge.png";
 
 const Certifications = ({ certifications }) => {
-    const paper = " bg-white py-3 px-4 border-2 rounded-lg shadow ";
-
     return (
         <div className="mb-12">
             <div className="flex justify-between items-center text-sm font-semibold">

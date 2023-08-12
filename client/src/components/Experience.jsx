@@ -4,8 +4,6 @@ import oruLogo from "../../public/oru_logo.png";
 import Image from "next/image";
 
 const Experience = ({ experience }) => {
-    const paper = " bg-white py-3 px-4 border-2 rounded-lg shadow ";
-
     return (
         <div className="mb-12">
             <div className="flex justify-between items-center text-sm font-semibold">
@@ -13,7 +11,7 @@ const Experience = ({ experience }) => {
                 <SecondaryBtn name={"Edit"} />
             </div>
             {experience.map((exp, index) => (
-                <div className={paper + "my-4 flex justify-between"}>
+                <div className="paper my-4 flex justify-between">
                     <div className="w-full text-sm ">
                         <div className="font-semibold flex justify-between mb-2">
                             <span>{`${exp.start} - ${exp.end}`}</span>

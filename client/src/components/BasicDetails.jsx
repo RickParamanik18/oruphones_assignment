@@ -1,10 +1,8 @@
 import SecondaryBtn from "./SecondaryBtn";
 
 const BasicDetails = (props) => {
-    const paper = " bg-white py-3 px-4 border-2 rounded-lg shadow ";
-
     return (
-        <div className={paper + "my-4"}>
+        <div className="paper my-4">
             {/* name */}
             <div className="my-4 text-sm font-semibold">
                 <p className="mb-1 text-[color:var(--demon)]">Your Name</p>

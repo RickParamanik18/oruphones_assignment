@@ -12,8 +12,6 @@ import { FiChevronDown } from "react-icons/fi";
 import { useRef, useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
 
-const paper = "bg-white py-3 px-4 border-2 rounded-lg shadow ";
-
 export default function RootLayout({ children }) {
     const [userOptionsVisibility, setUserOptionsVisibility] = useState(false);
     const [sideBarVisibility, setSideBarVisibility] = useState(false);
@@ -86,8 +84,7 @@ export default function RootLayout({ children }) {
                             </div>
                             <div
                                 className={
-                                    paper +
-                                    "transition-all absolute top-16 right-3" +
+                                    "paper transition-all absolute top-16 right-3" +
                                     (userOptionsVisibility ? "" : " hidden")
                                 }
                             >
@@ -114,12 +111,7 @@ export default function RootLayout({ children }) {
                     } abcd bg-white p-5 z-10 fixed top-0 h-screen w-[300px] flex flex-col justify-between items-center outline-0 transition-all	`}
                 >
                     <div>
-                        <div
-                            className={
-                                paper +
-                                "px-9 font-medium text-xl flex justify-center"
-                            }
-                        >
+                        <div className="paper px-9 font-medium text-xl flex justify-center">
                             <span>Dashboard</span>
                         </div>
                         <div className="text-[color:var(--primary)] pt-5">

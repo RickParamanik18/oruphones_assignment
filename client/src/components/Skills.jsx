@@ -1,10 +1,8 @@
 import SecondaryBtn from "./SecondaryBtn";
 
-const Skills = ({skills}) => {
-    const paper = " bg-white py-3 px-4 border-2 rounded-lg shadow ";
-
+const Skills = ({ skills }) => {
     return (
-        <div className={paper + "my-4"}>
+        <div className="paper my-4">
             <div className="flex justify-between items-center mb-4">
                 <span className="text-[color:var(--demon)] text-xl font-semibold">
                     Skills
