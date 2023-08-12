@@ -7,4 +7,10 @@
     --border-color: #ebebee;
     --smoke: #f0effa;
     --golden: #ffce10;
+    --demon: #1f1f1f;
+}
+@layer utilities {
+    .paper {
+        @apply bg-white py-3 px-4 border-2 rounded-lg shadow;
+    }
 }
