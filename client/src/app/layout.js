@@ -32,12 +32,13 @@ export default function RootLayout({ children }) {
             setSideBarVisibility(false);
         }
     };
+    console.log(children)
 
     return (
         <html lang="en">
             <body className={`${inter.className} bg-[color:var(--smoke)]`}>
                 {/* topbar */}
-                <div className="bg-white flex justify-between items-center py-2 px-4 border-b-2 border-[color:var(--border-color)] fixed w-full">
+                <div className="bg-white flex justify-between items-center py-2 px-4 border-b-2 border-[color:var(--border-color)] sticky top-0 w-full">
                     <div className="flex">
                         <Image
                             alt=""
