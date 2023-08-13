@@ -14,32 +14,30 @@ export default function Home() {
         password: "abc",
         pic: "pic url",
         about: "Lorem ipsum dolor sit amet consectetur. Erat auctor a aliquam vel congue luctus. Leo diam cras neque mauris ac arcu elit ipsum dolor sit amet consectetur.",
-        skills: [],
-        // skills: ["react", "node", "express", "javascript", "mongodb"],
-
+        skills: ["react", "node", "express", "javascript", "mongodb"],
         certifications: [
-            // { name: "Python", issued_by: "Coading Ninjas" },
-            // { name: "Javascript", issued_by: "Learn With Sumit" },
+            { name: "Python", issued_by: "Coading Ninjas" },
+            { name: "Javascript", issued_by: "Learn With Sumit" },
         ],
         experience: [
-            // {
-            //     role: "Full Stack Developer Intern",
-            //     job_type: "Internship",
-            //     company: "FacePrep",
-            //     start: "june 2022",
-            //     end: "sep 2022",
-            //     currently_working: false,
-            // },
+            {
+                role: "Full Stack Developer Intern",
+                job_type: "Internship",
+                company: "FacePrep",
+                start: "june 2022",
+                end: "sep 2022",
+                currently_working: false,
+            },
         ],
         education: [
-            // {
-            //     institute_name: "DSMS College",
-            //     degree_name: "BCA",
-            //     start: "2020",
-            //     end: "2023",
-            //     description:
-            //         "Lorem ipsum dolor sit amet consectetur. Erat auctor a aliquam vel congue luctus. Leo diam cras neque mauris ac arcu elit ipsum dolor sit amet consectetur.",
-            // },
+            {
+                institute_name: "DSMS College",
+                degree_name: "BCA",
+                start: "2020",
+                end: "2023",
+                description:
+                    "Lorem ipsum dolor sit amet consectetur. Erat auctor a aliquam vel congue luctus. Leo diam cras neque mauris ac arcu elit ipsum dolor sit amet consectetur.",
+            },
         ],
     };
 
