@@ -1,11 +1,8 @@
-import React from 'react'
+import BasicDetailsForm from "@/components/forms/BasicDetailsForm";
+import React from "react";
 
 const page = () => {
-  return (
-    <div>
-      signin
-    </div>
-  )
-}
+    return <BasicDetailsForm />;
+};
 
-export default page
+export default page;

@@ -3,6 +3,7 @@ import { Form, Input, Select } from "antd";
 import TextArea from "antd/es/input/TextArea";
 import React from "react";
 import PrimaryBtn from "../PrimaryBtn";
+import Link from "next/link";
 
 const skillOptions = [
     { label: "React.js", value: "React.js" },
@@ -21,7 +22,7 @@ const EducationForm = () => {
     return (
         <div className="p-5">
             <p className="text-xl font-semibold mb-6">
-                Enter Your Basic Details
+                Enter Your Basic Details to Signin
             </p>
             <Form onFinish={finishHandler} layout="vertical">
                 <Form.Item
@@ -87,7 +88,14 @@ const EducationForm = () => {
                 <Form.Item name={"skills"} label={"Select Your Skills"}>
                     <Select mode="tags" options={skillOptions} size="large" />
                 </Form.Item>
-                <PrimaryBtn name="Save" htmlType="submit" />
+                <div className="flex justify-center">
+                    <PrimaryBtn name="Signin" htmlType="submit" />
+                </div>
+                <div>
+                    GOTO: &nbsp;
+                    <Link href={"/auth/login"}>Login</Link>&nbsp;
+                    <Link href={"/"}>Home</Link>
+                </div>
             </Form>
         </div>
     );
