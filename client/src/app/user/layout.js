@@ -8,6 +8,9 @@ import { BiChevronRight } from "react-icons/bi";
 import { FiChevronDown } from "react-icons/fi";
 import { useRef, useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
+import { logout } from "@/apis/user.api";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Layout({ children }) {
     const [userOptionsVisibility, setUserOptionsVisibility] = useState(false);
@@ -27,7 +30,21 @@ export default function Layout({ children }) {
             setSideBarVisibility(false);
         }
     };
-    console.log(usePathname());
+
+    const logoutHandler = (values) => {
+        // logout(values)
+        //     .then((res) => {
+        //         toast(
+        //             res.status == 200 ? "Logout Successful" : "Logout Failed",
+        //             {
+        //                 autoClose: 1500,
+        //             }
+        //         );
+        //         res.status == 200 && router.push("/");
+        //     })
+        //     .catch((err) => console.log(err));
+    };
+
     return (
         <div>
             {/* topbar */}
@@ -135,11 +152,15 @@ export default function Layout({ children }) {
                         ))}
                     </div>
                 </div>
-                <div className="text-lg font-medium pb-2 cursor-pointer">
+                <div
+                    className="text-lg font-medium pb-2 cursor-pointer"
+                    onClick={logoutHandler}
+                >
                     Log Out
                 </div>
             </div>
             <div className="md:ms-[300px] p-5">{children}</div>
+            <ToastContainer />
         </div>
     );
 }

@@ -4,6 +4,10 @@ import TextArea from "antd/es/input/TextArea";
 import React from "react";
 import PrimaryBtn from "../PrimaryBtn";
 import Link from "next/link";
+import { signin } from "@/apis/user.api";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useRouter } from "next/navigation";
 
 const skillOptions = [
     { label: "React.js", value: "React.js" },
@@ -15,8 +19,19 @@ const skillOptions = [
 ];
 
 const EducationForm = () => {
+    const router = useRouter();
     const finishHandler = (values) => {
-        console.log(values);
+        signin(values)
+            .then((res) => {
+                toast(
+                    res.status == 200 ? "Signin Successful" : "Signin Failed",
+                    {
+                        autoClose: 1500,
+                    }
+                );
+                res.status == 200 && router.push("/user/profile");
+            })
+            .catch((err) => console.log(err));
     };
 
     return (
@@ -85,7 +100,11 @@ const EducationForm = () => {
                 >
                     <TextArea size="large" style={{ height: "100px" }} />
                 </Form.Item>
-                <Form.Item name={"skills"} label={"Select Your Skills"}>
+                <Form.Item
+                    name={"skills"}
+                    label={"Select Your Skills"}
+                    initialValue={[]}
+                >
                     <Select mode="tags" options={skillOptions} size="large" />
                 </Form.Item>
                 <div className="flex justify-center">
@@ -97,6 +116,7 @@ const EducationForm = () => {
                     <Link href={"/"}>Home</Link>
                 </div>
             </Form>
+            <ToastContainer />
         </div>
     );
 };

@@ -3,10 +3,22 @@ import { Form, Input } from "antd";
 import React from "react";
 import PrimaryBtn from "../PrimaryBtn";
 import Link from "next/link";
+import { login } from "@/apis/user.api";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useRouter } from "next/navigation";
 
 const LoginForm = () => {
+    const router = useRouter();
     const finishHandler = (values) => {
-        console.log(values);
+        login(values)
+            .then((res) => {
+                toast(res.status == 200 ? "Login Successful" : "Login Failed", {
+                    autoClose: 1500,
+                });
+                res.status == 200 && router.push("/user/profile");
+            })
+            .catch((err) => console.log(err));
     };
 
     return (
@@ -37,7 +49,7 @@ const LoginForm = () => {
                         },
                     ]}
                 >
-                    <Input size="large" password type="password" />
+                    <Input size="large" type="password" />
                 </Form.Item>
                 <div className="flex justify-center">
                     <PrimaryBtn name="Login" htmlType="submit" />
@@ -48,6 +60,7 @@ const LoginForm = () => {
                     <Link href={"/"}>Home</Link>
                 </div>
             </Form>
+            <ToastContainer />
         </div>
     );
 };
