@@ -1,5 +1,8 @@
 const express = require("express");
 const cors = require("cors");
+var cookieParser = require("cookie-parser");
+const router = require("./router/routes/user.router");
+
 const app = express();
 require("dotenv").config();
 
@@ -9,6 +12,9 @@ app.use(
         credentials: true,
     })
 );
+app.use(cookieParser());
+app.use("/api", router);
+app.use(express.static(__dirname + "/uploads")); //serving uploads folder as static directory
 
 app.listen(
     process.env.PORT,
