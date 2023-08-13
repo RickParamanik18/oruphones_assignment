@@ -1,4 +1,5 @@
 import SecondaryBtn from "./SecondaryBtn";
+import NothingAdded from "./NothingAdded";
 
 const Skills = ({ skills }) => {
     return (
@@ -10,11 +11,18 @@ const Skills = ({ skills }) => {
                 <SecondaryBtn name={"Edit"} />
             </div>
             <ul className="text-[color:var(--demon)]">
-                {skills.map((skill, index) => (
-                    <li key={index} className="my-2 text-base font-semibold">
-                        {skill}
-                    </li>
-                ))}
+                {skills.length ? (
+                    skills.map((skill, index) => (
+                        <li
+                            key={index}
+                            className="my-2 text-base font-semibold"
+                        >
+                            {skill}
+                        </li>
+                    ))
+                ) : (
+                    <NothingAdded />
+                )}
             </ul>
         </div>
     );
