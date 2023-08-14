@@ -6,15 +6,17 @@ import avatar from "../../../public/avatar.png";
 import { IoNotificationsOutline } from "react-icons/io5";
 import { BiChevronRight } from "react-icons/bi";
 import { FiChevronDown } from "react-icons/fi";
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import { logout } from "@/apis/user.api";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { userContext } from "@/context/user.context";
 
 export default function Layout({ children }) {
     const [userOptionsVisibility, setUserOptionsVisibility] = useState(false);
     const [sideBarVisibility, setSideBarVisibility] = useState(false);
+    const { isLoggedIn, setIsLoggedIn, token } = useContext(userContext);
     const menuRef = useRef(null);
     const router = useRouter();
     const tabs = [
@@ -31,21 +33,24 @@ export default function Layout({ children }) {
         }
     };
 
-    const logoutHandler = (values) => {
-        // logout(values)
-        //     .then((res) => {
-        //         toast(
-        //             res.status == 200 ? "Logout Successful" : "Logout Failed",
-        //             {
-        //                 autoClose: 1500,
-        //             }
-        //         );
-        //         res.status == 200 && router.push("/");
-        //     })
-        //     .catch((err) => console.log(err));
+    const logoutHandler = () => {
+        logout(token)
+            .then((res) => {
+                toast(
+                    res.status == 200 ? "Logout Successful" : "Logout Failed",
+                    {
+                        autoClose: 1500,
+                    }
+                );
+                if (res.status == 200) {
+                    setIsLoggedIn(false);
+                    router.push("/");
+                }
+            })
+            .catch((err) => console.log(err));
     };
 
-    return (
+    return isLoggedIn ? (
         <div>
             {/* topbar */}
             <div className="z-10 bg-white flex justify-between items-center py-2 px-4 border-b-2 border-[color:var(--border-color)] sticky top-0 w-full">
@@ -162,5 +167,7 @@ export default function Layout({ children }) {
             <div className="md:ms-[300px] p-5">{children}</div>
             <ToastContainer />
         </div>
+    ) : (
+        <>{router.push("/auth/login")}</>
     );
 }
