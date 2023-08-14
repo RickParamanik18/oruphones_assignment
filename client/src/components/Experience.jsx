@@ -1,19 +1,28 @@
-import React from "react";
+import React, { useContext } from "react";
 import SecondaryBtn from "./SecondaryBtn";
 import oruLogo from "../../public/oru_logo.png";
 import Image from "next/image";
 import NothingAdded from "./NothingAdded";
+import { userContext } from "@/context/user.context";
 
-const Experience = ({ experience, onClick }) => {
+const Experience = ({ onClick, addEnabled = false }) => {
+    const { userExperience, setUserExperience } = useContext(userContext);
+    
     return (
         <div className="mb-12">
             <div className="flex justify-between items-center text-sm font-semibold">
                 <span>Experience</span>
-                <SecondaryBtn name={"Edit"} onClick={onClick} />
+                <SecondaryBtn
+                    name={addEnabled ? "Add" : "Edit"}
+                    onClick={onClick}
+                />
             </div>
-            {experience.length ? (
-                experience.map((exp, index) => (
-                    <div className="paper my-4 flex justify-between">
+            {userExperience.length ? (
+                userExperience.map((exp, index) => (
+                    <div
+                        className="paper my-4 flex justify-between"
+                        key={index}
+                    >
                         <div className="w-full text-sm ">
                             <div className="font-semibold flex justify-between mb-2">
                                 <span>{`${exp.start} - ${exp.end}`}</span>

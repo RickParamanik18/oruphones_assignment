@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import SecondaryBtn from "./SecondaryBtn";
 import Image from "next/image";
 import badgePic from "../../public/badge.png";
 import NothingAdded from "./NothingAdded";
+import { userContext } from "@/context/user.context";
 
-const Certifications = ({ certifications, onClick, addEnabled = false }) => {
-    { addEnabled && console.log(certifications)}
+const Certifications = ({ onClick, addEnabled = false }) => {
+    const { userCertification, setUserCertification } = useContext(userContext);
     return (
         <div className="mb-12">
             <div className="flex justify-between items-center text-sm font-semibold">
@@ -15,8 +16,8 @@ const Certifications = ({ certifications, onClick, addEnabled = false }) => {
                     onClick={onClick}
                 />
             </div>
-            {certifications?.length ? (
-                certifications?.map((certification, index) => (
+            {userCertification?.length ? (
+                userCertification?.map((certification, index) => (
                     <div
                         className=" bg-white py-2 px-8 border-2 shadow my-4 flex items-center rounded-full"
                         key={index}

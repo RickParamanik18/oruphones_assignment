@@ -1,15 +1,22 @@
+import { useContext } from "react";
 import NothingAdded from "./NothingAdded";
 import SecondaryBtn from "./SecondaryBtn";
+import { userContext } from "@/context/user.context";
 
-const Education = ({ education, onClick }) => {
+const Education = ({ onClick, addEnabled = false }) => {
+    const { userEducation, setUserEducation } = useContext(userContext);
+
     return (
         <div>
             <div className="flex justify-between items-center text-sm font-semibold">
                 <span>Education</span>
-                <SecondaryBtn name={"Edit"} onClick={onClick} />
+                <SecondaryBtn
+                    name={addEnabled ? "Add" : "Edit"}
+                    onClick={onClick}
+                />
             </div>
-            {education.length ? (
-                education.map((edu, index) => (
+            {userEducation.length ? (
+                userEducation.map((edu, index) => (
                     <div className="paper my-4" key={index}>
                         <span className="text-[color:var(--primary)] text-xl font-semibold">
                             {edu.institute_name}

@@ -13,29 +13,16 @@ import { Modal } from "antd";
 export default function Home() {
     const [modalVisible, setModalVisible] = useState(false);
     const [editableField, setEditableField] = useState("");
-    const {
-        userData: user,
-        userEducation,
-        userCertification,
-        userExperience,
-    } = useContext(userContext);
+    const { userData: user } = useContext(userContext);
+
     const getEditableElement = () => {
         if (editableField) {
-            if (editableField == "edutation")
-                return (
-                    <Education education={userEducation} addEnabled={true} />
-                );
+            if (editableField == "education")
+                return <Education addEnabled={true} />;
             else if (editableField == "experience")
-                return (
-                    <Experience experience={userExperience} addEnabled={true} />
-                );
+                return <Experience addEnabled={true} />;
             else if (editableField == "certification")
-                return (
-                    <Certifications
-                        certifications={userCertification}
-                        addEnabled={true}
-                    />
-                );
+                return <Certifications addEnabled={true} />;
             else return null;
         }
     };
@@ -52,27 +39,18 @@ export default function Home() {
                 <div className="my-4 mx-1 sm:mx-8">
                     <BasicDetails {...user} />
                     <AboutMe {...user} />
-                    <Skills skills={user.skills} />
+                    <Skills skills={user?.skills} />
                 </div>
                 <div className="my-4 mx-1 sm:mx-8">
                     <ProfessionalDetails />
-                    <Certifications
-                        certifications={userCertification}
-                        onClick={() => onEdit("certification")}
-                    />
-                    <Experience
-                        experience={userExperience}
-                        onClick={() => onEdit("experience")}
-                    />
-                    <Education
-                        education={userEducation}
-                        onClick={() => onEdit("education")}
-                    />
+                    <Certifications onClick={() => onEdit("certification")} />
+                    <Experience onClick={() => onEdit("experience")} />
+                    <Education onClick={() => onEdit("education")} />
                 </div>
             </div>
             <Modal
                 open={modalVisible}
-                title={"Edit"}
+                title={"Edit " + editableField}
                 footer={null}
                 onCancel={() => setModalVisible(false)}
             >
