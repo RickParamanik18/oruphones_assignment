@@ -4,12 +4,12 @@ import oruLogo from "../../public/oru_logo.png";
 import Image from "next/image";
 import NothingAdded from "./NothingAdded";
 
-const Experience = ({ experience }) => {
+const Experience = ({ experience, onClick }) => {
     return (
         <div className="mb-12">
             <div className="flex justify-between items-center text-sm font-semibold">
                 <span>Experience</span>
-                <SecondaryBtn name={"Edit"} />
+                <SecondaryBtn name={"Edit"} onClick={onClick} />
             </div>
             {experience.length ? (
                 experience.map((exp, index) => (

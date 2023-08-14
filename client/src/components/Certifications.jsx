@@ -4,15 +4,19 @@ import Image from "next/image";
 import badgePic from "../../public/badge.png";
 import NothingAdded from "./NothingAdded";
 
-const Certifications = ({ certifications }) => {
+const Certifications = ({ certifications, onClick, addEnabled = false }) => {
+    { addEnabled && console.log(certifications)}
     return (
         <div className="mb-12">
             <div className="flex justify-between items-center text-sm font-semibold">
                 <span>Certifications</span>
-                <SecondaryBtn name={"Edit"} />
+                <SecondaryBtn
+                    name={addEnabled ? "Add" : "Edit"}
+                    onClick={onClick}
+                />
             </div>
-            {certifications.length ? (
-                certifications.map((certification, index) => (
+            {certifications?.length ? (
+                certifications?.map((certification, index) => (
                     <div
                         className=" bg-white py-2 px-8 border-2 shadow my-4 flex items-center rounded-full"
                         key={index}

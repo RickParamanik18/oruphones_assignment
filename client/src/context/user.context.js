@@ -16,7 +16,40 @@ const UserContextProvider = ({ children }) => {
         const data = token ? jwt(token) : {};
         if (data.name) {
             setIsLoggedIn(true);
-            setUserData(data);
+            // setUserData(data);
+            setUserData({
+                name: "Rick Paramanik",
+                phone: "7550912113",
+                email: "rickckir100@gmail.com",
+                password: "abc",
+                pic: "pic url",
+                about: "Lorem ipsum dolor sit amet consectetur. Erat auctor a aliquam vel congue luctus. Leo diam cras neque mauris ac arcu elit ipsum dolor sit amet consectetur.",
+                skills: ["react", "node", "express", "javascript", "mongodb"],
+            });
+            setUserCertification([
+                { name: "Python", issued_by: "Coading Ninjas" },
+                { name: "Javascript", issued_by: "Learn With Sumit" },
+            ]);
+            setUserEducation([
+                {
+                    institute_name: "DSMS College",
+                    degree_name: "BCA",
+                    start: "2020",
+                    end: "2023",
+                    description:
+                        "Lorem ipsum dolor sit amet consectetur. Erat auctor a aliquam vel congue luctus. Leo diam cras neque mauris ac arcu elit ipsum dolor sit amet consectetur.",
+                },
+            ]);
+            setUserExperience([
+                {
+                    role: "Full Stack Developer Intern",
+                    job_type: "Internship",
+                    company: "FacePrep",
+                    start: "june 2022",
+                    end: "sep 2022",
+                    currently_working: false,
+                },
+            ]);
         }
     }, []);
 

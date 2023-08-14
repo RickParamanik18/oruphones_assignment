@@ -1,12 +1,12 @@
 import NothingAdded from "./NothingAdded";
 import SecondaryBtn from "./SecondaryBtn";
 
-const Education = ({ education }) => {
+const Education = ({ education, onClick }) => {
     return (
         <div>
             <div className="flex justify-between items-center text-sm font-semibold">
                 <span>Education</span>
-                <SecondaryBtn name={"Edit"} />
+                <SecondaryBtn name={"Edit"} onClick={onClick} />
             </div>
             {education.length ? (
                 education.map((edu, index) => (

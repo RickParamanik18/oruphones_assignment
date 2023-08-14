@@ -16,7 +16,7 @@ import { userContext } from "@/context/user.context";
 export default function Layout({ children }) {
     const [userOptionsVisibility, setUserOptionsVisibility] = useState(false);
     const [sideBarVisibility, setSideBarVisibility] = useState(false);
-    const { setIsLoggedIn, token } = useContext(userContext);
+    const { setIsLoggedIn, token, userData } = useContext(userContext);
     const menuRef = useRef(null);
     const router = useRouter();
     const tabs = [
@@ -92,7 +92,7 @@ export default function Layout({ children }) {
                                     Welcome Back,
                                 </p>
                                 <p className="text-xl font-semibold">
-                                    Rick Paramanik
+                                    {userData.name}
                                 </p>
                             </div>
                             <FiChevronDown

@@ -9,6 +9,7 @@ const NothingAdded = ({ height = 120, width = 120, className }) => {
                 src={nothingAdded}
                 height={height}
                 width={width}
+                alt=""
                 className={className}
             />
         </div>
