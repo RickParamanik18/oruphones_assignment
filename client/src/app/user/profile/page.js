@@ -1,3 +1,4 @@
+"use client";
 import BasicDetails from "@/components/BasicDetails";
 import AboutMe from "@/components/AboutMe";
 import Skills from "@/components/Skills";
@@ -5,43 +6,13 @@ import ProfessionalDetails from "@/components/ProfessionalDetails";
 import Certifications from "@/components/Certifications";
 import Experience from "@/components/Experience";
 import Education from "@/components/Education";
+import { useContext } from "react";
+import { userContext } from "@/context/user.context";
 
 export default function Home() {
-    const user = {
-        name: "Rick Paramanik",
-        phone: "7550912113",
-        email: "rickckir100@gmail.com",
-        password: "abc",
-        pic: "pic url",
-        about: "Lorem ipsum dolor sit amet consectetur. Erat auctor a aliquam vel congue luctus. Leo diam cras neque mauris ac arcu elit ipsum dolor sit amet consectetur.",
-        skills: ["react", "node", "express", "javascript", "mongodb"],
-        certifications: [
-            { name: "Python", issued_by: "Coading Ninjas" },
-            { name: "Javascript", issued_by: "Learn With Sumit" },
-        ],
-        experience: [
-            {
-                role: "Full Stack Developer Intern",
-                job_type: "Internship",
-                company: "FacePrep",
-                start: "june 2022",
-                end: "sep 2022",
-                currently_working: false,
-            },
-        ],
-        education: [
-            {
-                institute_name: "DSMS College",
-                degree_name: "BCA",
-                start: "2020",
-                end: "2023",
-                description:
-                    "Lorem ipsum dolor sit amet consectetur. Erat auctor a aliquam vel congue luctus. Leo diam cras neque mauris ac arcu elit ipsum dolor sit amet consectetur.",
-            },
-        ],
-    };
+    const { userData: user } = useContext(userContext);
 
-    return (
+    return user.name ? (
         <div className="relative">
             <div className="bg-[color:var(--primary)] text-white font-medium text-xl py-3 px-4 rounded-lg h-[150px]">
                 MY PROFILE
@@ -60,5 +31,5 @@ export default function Home() {
                 </div>
             </div>
         </div>
-    );
+    ) : null;
 }

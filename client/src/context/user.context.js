@@ -33,7 +33,7 @@ const UserContextProvider = ({ children }) => {
                 setUserExperience,
                 isLoggedIn,
                 setIsLoggedIn,
-                token
+                token,
             }}
         >
             {children}

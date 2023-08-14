@@ -1,13 +1,14 @@
 "use client";
 import { Form, Input, Select } from "antd";
 import TextArea from "antd/es/input/TextArea";
-import React from "react";
+import React, { useContext } from "react";
 import PrimaryBtn from "../PrimaryBtn";
 import Link from "next/link";
 import { signin } from "@/apis/user.api";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/navigation";
+import { userContext } from "@/context/user.context";
 
 const skillOptions = [
     { label: "React.js", value: "React.js" },
@@ -20,6 +21,7 @@ const skillOptions = [
 
 const EducationForm = () => {
     const router = useRouter();
+    const { setIsLoggedIn } = useContext(userContext);
     const finishHandler = (values) => {
         signin(values)
             .then((res) => {
@@ -29,7 +31,10 @@ const EducationForm = () => {
                         autoClose: 1500,
                     }
                 );
-                res.status == 200 && router.push("/user/profile");
+                if (res.status == 200) {
+                    setIsLoggedIn(true);
+                    router.push("/user/profile");
+                }
             })
             .catch((err) => console.log(err));
     };
@@ -86,7 +91,7 @@ const EducationForm = () => {
                         },
                     ]}
                 >
-                    <Input size="large" password type="password" />
+                    <Input size="large" type="password" />
                 </Form.Item>
                 <Form.Item
                     name={"about"}

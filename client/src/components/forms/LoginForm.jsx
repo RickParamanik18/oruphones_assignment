@@ -1,22 +1,27 @@
 "use client";
 import { Form, Input } from "antd";
-import React from "react";
+import React, { useContext } from "react";
 import PrimaryBtn from "../PrimaryBtn";
 import Link from "next/link";
 import { login } from "@/apis/user.api";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/navigation";
+import { userContext } from "@/context/user.context";
 
 const LoginForm = () => {
     const router = useRouter();
+    const { setIsLoggedIn } = useContext(userContext);
     const finishHandler = (values) => {
         login(values)
             .then((res) => {
                 toast(res.status == 200 ? "Login Successful" : "Login Failed", {
                     autoClose: 1500,
                 });
-                res.status == 200 && router.push("/user/profile");
+                if (res.status == 200) {
+                    setIsLoggedIn(true);
+                    router.push("/user/profile");
+                }
             })
             .catch((err) => console.log(err));
     };

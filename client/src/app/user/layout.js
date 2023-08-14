@@ -16,7 +16,7 @@ import { userContext } from "@/context/user.context";
 export default function Layout({ children }) {
     const [userOptionsVisibility, setUserOptionsVisibility] = useState(false);
     const [sideBarVisibility, setSideBarVisibility] = useState(false);
-    const { isLoggedIn, setIsLoggedIn, token } = useContext(userContext);
+    const { setIsLoggedIn, token } = useContext(userContext);
     const menuRef = useRef(null);
     const router = useRouter();
     const tabs = [
@@ -50,7 +50,7 @@ export default function Layout({ children }) {
             .catch((err) => console.log(err));
     };
 
-    return isLoggedIn ? (
+    return (
         <div>
             {/* topbar */}
             <div className="z-10 bg-white flex justify-between items-center py-2 px-4 border-b-2 border-[color:var(--border-color)] sticky top-0 w-full">
@@ -167,7 +167,5 @@ export default function Layout({ children }) {
             <div className="md:ms-[300px] p-5">{children}</div>
             <ToastContainer />
         </div>
-    ) : (
-        <>{router.push("/auth/login")}</>
     );
 }
