@@ -27,8 +27,16 @@ const UserContextProvider = ({ children }) => {
                 skills: ["react", "node", "express", "javascript", "mongodb"],
             });
             setUserCertification([
-                { name: "Python", issued_by: "Coading Ninjas" },
-                { name: "Javascript", issued_by: "Learn With Sumit" },
+                {
+                    _id: "1231232323",
+                    name: "Python",
+                    issued_by: "Coading Ninjas",
+                },
+                {
+                    _id: "5675634546",
+                    name: "Javascript",
+                    issued_by: "Learn With Sumit",
+                },
             ]);
             setUserEducation([
                 {
