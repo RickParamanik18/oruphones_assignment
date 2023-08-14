@@ -25,7 +25,4 @@ const educationSchema = new Schema({
     },
 });
 
-module.exports = {
-    educations: con.model("educations", educationSchema),
-    educationSchema,
-};
+module.exports = con.model("educations", educationSchema);

@@ -1,9 +1,6 @@
 const con = require("../config/mongo.connection");
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-const { certificationSchema } = require("./certification.model");
-const { educationSchema } = require("./education.model");
-const { experienceSchema } = require("./experience.model");
 
 const userSchema = new Schema({
     name: {
@@ -35,15 +32,15 @@ const userSchema = new Schema({
         default: [],
     },
     certifications: {
-        type: [certificationSchema],
+        type: [String],
         default: [],
     },
     experience: {
-        type: [experienceSchema],
+        type: [String],
         default: [],
     },
     education: {
-        type: [educationSchema],
+        type: [String],
         default: [],
     },
 });

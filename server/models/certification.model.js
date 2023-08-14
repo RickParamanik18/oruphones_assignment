@@ -13,7 +13,4 @@ const certificationSchema = new Schema({
     },
 });
 
-module.exports = {
-    certifications: con.model("certifications", certificationSchema),
-    certificationSchema,
-};
+module.exports = con.model("certifications", certificationSchema);
