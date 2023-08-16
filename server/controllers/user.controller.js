@@ -11,7 +11,7 @@ const login = async (req, res) => {
 
 const signin = async (req, res) => {
     const headerParams = req.headers;
-    
+
     const result = await userService.signin(headerParams);
     result.status == 200 &&
         res.cookie("userData", result.token, { maxAge: 86400000 });
@@ -26,4 +26,13 @@ const logout = async (req, res) => {
     });
 };
 
-module.exports = { login, signin, logout };
+const singleUpdate = async (req, res) => {
+    const headerParams = req.headers;
+
+    const result = await userService.singleUpdate(headerParams);
+    result.status == 200 &&
+        res.cookie("userData", result.token, { maxAge: 86400000 });
+    res.send(result);
+};
+
+module.exports = { login, signin, logout, singleUpdate };

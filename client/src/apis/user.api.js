@@ -43,3 +43,17 @@ export const logout = async (authorization) => {
         return null;
     }
 };
+
+export const singleUpdate = async (authorization, updateData) => {
+    try {
+        const result = await axios({
+            url: `${process.env.NEXT_PUBLIC_API_URL}/user/single`,
+            method: "put",
+            headers: { authorization, updateData: JSON.stringify(updateData) },
+            withCredentials: true,
+        });
+        return result.status == 200 ? result.data : null;
+    } catch (err) {
+        return null;
+    }
+};

@@ -32,8 +32,29 @@ const signin = async (params) => {
         return null;
     }
 };
+const singleUpdate = async (params) => {
+    try {
+        let { userData, updatedata: updateData } = params;
+        updateData = JSON.parse(updateData);
+
+        await users.updateOne(
+            { _id: userData._id },
+            {
+                $set: {
+                    ...updateData,
+                },
+            }
+        );
+
+        return await users.findOne({ _id: userData._id });
+    } catch (err) {
+        console.log(err);
+        return null;
+    }
+};
 
 module.exports = {
     login,
     signin,
+    singleUpdate,
 };

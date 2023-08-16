@@ -39,7 +39,7 @@ export default function Home() {
                 <div className="my-4 mx-1 sm:mx-8">
                     <BasicDetails {...user} />
                     <AboutMe {...user} />
-                    <Skills skills={user?.skills} />
+                    <Skills skills={user?.skills} _id={user?._id} />
                 </div>
                 <div className="my-4 mx-1 sm:mx-8">
                     <ProfessionalDetails />

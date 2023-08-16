@@ -6,5 +6,6 @@ const { isAuthorized } = require("../../middlewares/isAuthorized");
 router.get("/login", userController.login);
 router.post("/signin", userController.signin);
 router.get("/logout", isAuthorized, userController.logout);
+router.put("/single", isAuthorized, userController.singleUpdate);
 
 module.exports = router;

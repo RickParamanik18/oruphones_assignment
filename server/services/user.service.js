@@ -53,4 +53,32 @@ const signin = async (params) => {
         };
     }
 };
-module.exports = { login, signin };
+
+const singleUpdate = async (params) => {
+    try {
+        let data = await userRepo.singleUpdate(params);
+        if (!data)
+            return {
+                status: 400,
+                msg: "failed",
+            };
+        data = data.toObject();
+        delete data.password;
+
+        const token = jwt.sign(data, process.env.JWT_SECRET);
+
+        return {
+            status: 200,
+            msg: "success",
+            token,
+        };
+    } catch (err) {
+        console.log(err);
+        return {
+            status: 400,
+            msg: "failed",
+        };
+    }
+};
+
+module.exports = { login, signin, singleUpdate };
