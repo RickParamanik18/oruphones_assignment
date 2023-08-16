@@ -2,30 +2,59 @@
 import { DatePicker, Form, Input } from "antd";
 import TextArea from "antd/es/input/TextArea";
 import dayjs from "dayjs";
-import React from "react";
+import React, { useContext } from "react";
 import PrimaryBtn from "../PrimaryBtn";
+import { createItem, updateItem } from "@/apis/udl.api";
+import { userContext } from "@/context/user.context";
 
 const EducationForm = (props) => {
     const {
         isEditing,
+        _id,
         institute_name = "",
         degree_name = "",
         start,
         end,
         description = "",
+        hideFormModal = () => {},
     } = props;
+    const { userEducation, setUserEducation, token } = useContext(userContext);
+    const [form] = Form.useForm();
 
-    const finishHandler = (values) => {
+    const finishHandler = async (values) => {
         values.start = values.start.format();
         values.end = values.end.format();
-        console.log(values);
+        if (isEditing) {
+            await updateItem(token, {
+                listType: "education",
+                _id,
+                ...values,
+            });
+            userEducation.map((education, index) => {
+                if (education._id === _id) {
+                    const temp = userEducation;
+                    temp.splice(index, 1, values);
+                    setUserEducation(temp);
+                }
+            });
+        } else {
+            await createItem(token, {
+                listType: "education",
+                ...values,
+            });
+            setUserEducation((prev) => [values, ...prev]);
+        }
+        form.resetFields();
+        //to close the form
+        hideFormModal();
     };
+
     return (
         <div className="p-5">
             <p className="text-xl font-semibold mb-6">
                 {isEditing ? "Edit Education" : "Add Education"}
             </p>
-            <Form onFinish={finishHandler} layout="vertical">
+            <Form onFinish={finishHandler} layout="vertical" form={form}>
                 <Form.Item
                     name={"degree_name"}
                     label={"Degree Name"}

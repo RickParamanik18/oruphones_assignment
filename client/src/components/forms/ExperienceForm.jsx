@@ -1,9 +1,10 @@
 "use client";
 import { Checkbox, DatePicker, Form, Input, Select } from "antd";
 import dayjs from "dayjs";
-import React, { useState } from "react";
-
+import React, { useContext, useState } from "react";
+import { createItem, updateItem } from "@/apis/udl.api";
 import PrimaryBtn from "../PrimaryBtn";
+import { userContext } from "@/context/user.context";
 
 const jobTypeOptions = [
     {
@@ -22,28 +23,57 @@ const jobTypeOptions = [
 const ExperienceForm = (props) => {
     const {
         isEditing,
+        _id,
         role = "",
         job_type = "",
         company,
         start,
         end,
         currently_working = false,
+        hideFormModal = () => {},
     } = props;
 
     const [checkboxVal, setCheckboxVal] = useState(currently_working);
-    const finishHandler = (values) => {
+    const { userExperience, setUserExperience, token } =
+        useContext(userContext);
+    const [form] = Form.useForm();
+
+    const finishHandler = async (values) => {
         values.start = values.start.format();
         values.end = values.end ? values.end.format() : "";
-
-        values.currently_working = checkboxVal;
+        values.currently_working = Number(checkboxVal);
         console.log(values);
+        if (isEditing) {
+            await updateItem(token, {
+                listType: "experience",
+                _id,
+                ...values,
+            });
+            userExperience.map((exp, index) => {
+                if (exp._id === _id) {
+                    const temp = userExperience;
+                    temp.splice(index, 1, values);
+                    setUserExperience(temp);
+                }
+            });
+        } else {
+            const res = await createItem(token, {
+                listType: "experience",
+                ...values,
+            });
+            console.log(res);
+            setUserExperience((prev) => [values, ...prev]);
+        }
+        form.resetFields();
+        //to close the form
+        hideFormModal();
     };
     return (
         <div className="p-5">
             <p className="text-xl font-semibold mb-6">
                 {isEditing ? "Edit Experience" : "Add Experience"}
             </p>
-            <Form onFinish={finishHandler} layout="vertical">
+            <Form onFinish={finishHandler} layout="vertical" form={form}>
                 <Form.Item
                     name={"role"}
                     label={"Role Name"}

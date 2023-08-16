@@ -3,6 +3,7 @@ import { Form, Input } from "antd";
 import React, { useContext } from "react";
 import PrimaryBtn from "../PrimaryBtn";
 import { userContext } from "@/context/user.context";
+import { createItem, updateItem } from "@/apis/udl.api";
 
 const CertificationForm = (props) => {
     const {
@@ -12,14 +13,17 @@ const CertificationForm = (props) => {
         issued_by = "",
         hideFormModal = () => {},
     } = props;
-    const { userCertification, setUserCertification } = useContext(userContext);
+    const { userCertification, setUserCertification, token } =
+        useContext(userContext);
     const [form] = Form.useForm();
 
-    const finishHandler = (values) => {
-        console.log(values);
-        //api call
-        // .then(data=>{
+    const finishHandler = async (values) => {
         if (isEditing) {
+            await updateItem(token, {
+                listType: "certifications",
+                _id,
+                ...values,
+            });
             userCertification.map((certefication, index) => {
                 if (certefication._id === _id) {
                     const temp = userCertification;
@@ -28,14 +32,17 @@ const CertificationForm = (props) => {
                 }
             });
         } else {
+            await createItem(token, {
+                listType: "certifications",
+                ...values,
+            });
             setUserCertification((prev) => [values, ...prev]);
         }
         form.resetFields();
-        // })
-
         //to close the form
         hideFormModal();
     };
+
     return (
         <div className="p-5">
             <p className="text-xl font-semibold mb-6">

@@ -107,7 +107,6 @@ const updateItem = async (params) => {
                 }
             );
         } else if (listType == "experience") {
-            console.log("hei");
             await experiences.updateOne(
                 { _id },
                 {

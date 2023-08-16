@@ -8,23 +8,34 @@ import { userContext } from "@/context/user.context";
 import { MdDeleteOutline, MdEdit } from "react-icons/md";
 import { Modal } from "antd";
 import CertificationForm from "./forms/CertificationForm";
+import { deleteItem } from "@/apis/udl.api";
 
 const Certifications = ({ onClick, addEnabled = false }) => {
-    const { userCertification, setUserCertification } = useContext(userContext);
+    const { userCertification, setUserCertification, token } =
+        useContext(userContext);
     const [formModalVisible, setFormModalVisible] = useState(false);
     const [formModalData, setFormModalData] = useState({});
 
-    const deleteCertification = (_id) => {
-        const tempCertifications = userCertification.filter(
-            (certification) => certification._id !== _id
-        );
-        console.log(_id, tempCertifications);
-        setUserCertification(tempCertifications);
+    const deleteCertification = async (_id) => {
+        await deleteItem(token, {
+            listType: "certifications",
+            _id,
+        })
+            .then((data) => {
+                if (data.status == 200) {
+                    const tempCertifications = userCertification.filter(
+                        (certification) => certification._id !== _id
+                    );
+                    setUserCertification(tempCertifications);
+                }
+            })
+            .catch((err) => console.log(err));
     };
     const hideFormModal = () => {
         setFormModalData({});
         setFormModalVisible(false);
     };
+    
     return (
         <div className="mb-12">
             <div className="flex justify-between items-center text-sm font-semibold">
